@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="projetostyle.css">
+    <title>Cadastro</title>
+    <style>
+        .form-container { max-width: 400px; margin: auto; }
+        input, select, button { width: 100%; margin: 10px 0; padding: 10px; }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <img id="logo" src="flux.jpg" alt="Logo do Fluxo">
+        <div class="nav-options">
+            <a href="index.html">Inicio</a>
+            <a href="mapa.html">Chamar Motoboy</a>
+            <a href="login.html">Login</a>
+            <a href="cadastro.HTML">Cadastrar </a>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Pesquisar...">
+            <button>Buscar</button>
+     </div>
+   </div> 
+
+    <div id="log"  class="form-container">
+        <h2>Cadastro</h2>
+        <form id="cadastro-form">
+            <input type="text" id="nome" placeholder="Nome" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="password" id="senha" placeholder="Senha" required>
+            <label for="escolha">Escolha uma Função:</label>
+            <select id="escolha">
+                <option value="motoboy">Motoboy</option>
+                <option value="loja">Loja</option>
+            </select>
+            <button type="submit">Cadastrar</button>
+        </form>
+        <p>Já tem uma conta? <a href="login.html">Faça login</a></p>
+    </div>
+
+    <script>
+        document.getElementById('cadastro-form').onsubmit = function(e) {
+            e.preventDefault();
+            
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            const senha = document.getElementById('senha').value;
+            const escolha = document.getElementById('escolha').value;
+
+            // Salvar dados no Local Storage
+            let usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+            usuarios.push({ nome, email, senha, escolha });
+            localStorage.setItem('usuarios', JSON.stringify(usuarios));
+
+            alert("Cadastro realizado com sucesso!");
+            document.getElementById('cadastro-form').reset();
+        };
+    </script>
+</body>
+</html>

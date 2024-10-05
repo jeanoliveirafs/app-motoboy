@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="projetostyle.css">
+    <title>Login</title>
+    <style>
+        .form-container { max-width: 400px; margin: auto; }
+        input, button { width: 100%; margin: 10px 0; padding: 10px; }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <img id="logo" src="flux.jpg" alt="Logo do Fluxo">
+        <div class="nav-options">
+            <a href="index.html">Inicio</a>
+            <a href="mapa.html">Chamar Motoboy</a>
+            <a href="login.html">Login</a>
+            <a href="cadastro.HTML">Cadastrar </a>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Pesquisar...">
+            <button>Buscar</button>
+     </div>
+   </div> 
+
+    <div id="log" class="form-container">
+        <h2>Login</h2>
+        <form id="login-form">
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="password" id="senha" placeholder="Senha" required>
+            <button type="submit">Login</button>
+        </form>
+        <p>Ainda não tem uma conta? <a href="CADASTRO.HTML">Cadastre-se</a></p>
+    </div>
+
+    <script>
+        document.getElementById('login-form').onsubmit = function(e) {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const senha = document.getElementById('senha').value;
+
+            // Carregar usuários do Local Storage
+            const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+            const usuario = usuarios.find(u => u.email === email && u.senha === senha);
+
+            if (usuario) {
+                // Armazenar o usuário logado
+                localStorage.setItem('usuarioLogado', JSON.stringify(usuario));
+                window.location.href = 'mapa.html'; // Redirecionar para a página do mapa
+            } else {
+                alert("Email ou senha inválidos.");
+            }
+        };
+    </script>
+</body>
+</html>
